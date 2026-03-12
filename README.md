@@ -18,6 +18,17 @@ A fast, personal bookmark manager that runs entirely on **Cloudflare Workers** �
 
 ---
 
+## Prerequisites
+
+You'll need a **Cloudflare account** — [sign up free at cloudflare.com](https://dash.cloudflare.com/sign-up). No credit card is required, and BookmarkBam runs entirely within Cloudflare's free tier:
+
+- ✅ **Workers** — free tier includes 100,000 requests/day
+- ✅ **KV storage** — free tier includes 100,000 reads/day and 1,000 writes/day
+
+For a personal bookmark manager this is more than enough — you'd have to click a bookmark 100,000 times in a single day to get anywhere near the limits.
+
+---
+
 ## Deploy
 
 ### Option 1 — One Click (No coding required)
@@ -41,7 +52,7 @@ npm install -g wrangler
 wrangler login
 
 # 3. Create the KV namespace
-wrangler kv namespace create dan_bookmarks
+wrangler kv namespace create bookmarks
 # → Copy the ID from the output
 
 # 4. Paste the ID into wrangler.toml
@@ -56,14 +67,9 @@ wrangler deploy
 
 ## Configuration
 
-Open `bookmarkbamdesktop.js` and edit these lines at the top of the file:
+All settings are configured on first launch via the setup screen — no file editing needed. Once deployed, visit your worker URL and you'll be walked through entering your name, location coordinates, and WeatherAPI key.
 
-```js
-const userName = "Dan";              // Your name — used in the greeting
-const weatherLat = 59.479668;        // Your latitude
-const weatherLon = 10.32025375;      // Your longitude
-const weatherApiKey = "YOUR_KEY";    // Free key from weatherapi.com
-```
+You can update any of these anytime from the padlock menu once the app is running.
 
 To get a free weather API key, sign up at [weatherapi.com](https://www.weatherapi.com) — no credit card required.
 
@@ -73,9 +79,9 @@ To get a free weather API key, sign up at [weatherapi.com](https://www.weatherap
 
 ```
 BookmarkBam/
-├── bookmarkbamdesktop.js   # The entire worker — all logic and UI in one file
-├── wrangler.toml           # Cloudflare Workers config
-├── package.json            # Node dependencies (just Wrangler)
+├── bookmarkbam.js   # The entire worker — all logic and UI in one file
+├── wrangler.toml    # Cloudflare Workers config
+├── package.json     # Node dependencies (just Wrangler)
 └── README.md
 ```
 
